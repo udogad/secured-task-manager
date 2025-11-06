@@ -1,0 +1,30 @@
+# Flutter/Dart
+.dart_tool/
+.packages
+pubspec.lock
+build/
+.idea/
+.vscode/
+.flutter-plugins
+.flutter-plugins-dependencies
+.metadata
+
+# Firebase / local secrets
+android/app/google-services.json
+ios/Runner/GoogleService-Info.plist
+lib/firebase_options.dart
+.env
+
+# Platform outputs
+ios/Pods/
+*.iml
+macos/Flutter/ephemeral/
+windows/Flutter/ephemeral/
+linux/flutter/ephemeral/
+**/local.properties
+
+# Generated files
+*.lock
+*.log
+*.apk
+*.aab
