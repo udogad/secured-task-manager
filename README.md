@@ -1,5 +1,5 @@
 # 🛡️ Secured Task Manager
-**Udochukwu Ukasoanya — Senior Flutter Developer**
+** Udochukwu Ukasoanya — Senior Flutter Developer**
 
 A secure, feature-rich task management app built with **Flutter** and **Firebase**, focused on user data protection, encrypted storage, and real-time synchronization.  
 This project demonstrates modular architecture, authentication, and professional-grade Flutter practices for production apps.
