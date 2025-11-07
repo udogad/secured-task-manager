@@ -1,14 +1,11 @@
 import 'dart:developer' as developer;
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 /// Environment configuration holder for Secure Task Manager.
 ///
-/// - Loads `.env` file at startup (safe for local dev only).
 /// - Exposes typed getters for base URLs, API keys, feature flags.
-/// - Falls back to sane defaults if `.env` is missing (so the app still runs).
 ///
-/// In production, you should **inject values at build time** instead of shipping a real `.env`
-/// file with secrets.  Example (CI/CD):
+/// In production, you should **inject values at build time**.
+/// Example (CI/CD):
 ///
 ///   flutter build apk --dart-define=API_BASE_URL=https://api.prod.example.com
 ///   flutter build web --dart-define=FLAVOR=prod
@@ -20,12 +17,9 @@ class AppEnv {
   /// Initialize environment — must be called before runApp().
   static Future<void> init() async {
     if (_initialized) return;
-    try {
-      await dotenv.load(fileName: '.env');
-      developer.log('✅ Loaded .env (${dotenv.env.length} entries)');
-    } catch (_) {
-      developer.log('⚠️ No .env file found, using defaults');
-    }
+    // In the future, we might have async initialization here.
+    // For now, it's a no-op.
+    developer.log('✅ AppEnv initialized');
     _initialized = true;
   }
 
@@ -47,7 +41,37 @@ class AppEnv {
       const bool.fromEnvironment('ENABLE_ANALYTICS', defaultValue: false);
 
   /// The OpenAI API key.
-  static String? get openAiApiKey => dotenv.env['OPENAI_API_KEY'];
+  static String? get openAiApiKey =>
+      const String.fromEnvironment('OPENAI_API_KEY');
+
+  // Firebase
+  /// The Firebase API key.
+  static String get firebaseApiKey =>
+      const String.fromEnvironment('FIREBASE_API_KEY');
+
+  /// The Firebase Auth domain.
+  static String get firebaseAuthDomain =>
+      const String.fromEnvironment('FIREBASE_AUTH_DOMAIN');
+
+  /// The Firebase project ID.
+  static String get firebaseProjectId =>
+      const String.fromEnvironment('FIREBASE_PROJECT_ID');
+
+  /// The Firebase storage bucket.
+  static String get firebaseStorageBucket =>
+      const String.fromEnvironment('FIREBASE_STORAGE_BUCKET');
+
+  /// The Firebase messaging sender ID.
+  static String get firebaseMessagingSenderId =>
+      const String.fromEnvironment('FIREBASE_MESSAGING_SENDER_ID');
+
+  /// The Firebase App ID.
+  static String get firebaseAppId =>
+      const String.fromEnvironment('FIREBASE_APP_ID');
+
+  /// The Firebase measurement ID.
+  static String get firebaseMeasurementId =>
+      const String.fromEnvironment('FIREBASE_MEASUREMENT_ID');
 
   /// Whether the app is running in production.
   static bool get isProd => flavor == 'prod';

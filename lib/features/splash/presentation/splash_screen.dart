@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import '../../../core/storage/storage_service.dart';
 
 /// A splash screen that handles initial app setup and navigation.
 class SplashPage extends StatefulWidget {
@@ -21,7 +21,7 @@ class _SplashPageState extends State<SplashPage> {
 
   Future<void> _init() async {
     await Future.delayed(const Duration(milliseconds: 500)); // fast
-    final storage = FlutterSecureStorage();
+    final storage = getStorageService;
     final seen = await storage.read(key: 'onboarding_complete') == 'true';
     if (!mounted) return;
     if (!seen) {

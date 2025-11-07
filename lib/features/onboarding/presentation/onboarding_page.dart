@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:go_router/go_router.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import '../../../core/storage/storage_service.dart';
 
 /// A page for onboarding new users.
 class OnboardingPage extends StatefulWidget {
@@ -39,7 +39,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
       _controller.nextPage(
           duration: const Duration(milliseconds: 400), curve: Curves.easeInOut);
     } else {
-      await const FlutterSecureStorage().write(key: 'onboarding_complete', value: 'true');
+      final storage = getStorageService;
+      await storage.write(key: 'onboarding_complete', value: 'true');
       if (!mounted) return;
       context.go('/sign-up');
     }
