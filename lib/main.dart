@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_core/firebase_core.dart'; // Import Firebase Core
+import 'package:secure_task_manager/firebase_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'core/env/app_env.dart';
 import 'app.dart';
@@ -15,7 +16,9 @@ Future<SharedPreferences> _initializeDependencies() async {
   await AppEnv.init();
 
   // Initialize Firebase
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   return await SharedPreferences.getInstance();
 }
